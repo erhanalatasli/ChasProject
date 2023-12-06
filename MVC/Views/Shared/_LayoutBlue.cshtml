@@ -1,0 +1,131 @@
+﻿@using MVC.Settings;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title | @AppSettings.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/layouts/blue/blue.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/MVC.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>CHAS</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li class="nav-item">
+                    <a class="a-sidebar" asp-area="" asp-controller="Favorites" asp-action="GetFavorites"> Favorites</a>
+                </li>
+            </ul>
+            @if (User.IsInRole("Admin"))
+            {
+                <ul class="list-unstyled components">
+                    <li class="nav-item">
+                        <a class="a-sidebar" asp-area="Report" asp-controller="Home" asp-action="Index"> Report</a>
+                    </li>
+                </ul>
+            }            
+            <ul class="list-unstyled components">
+                <li class="nav-item">
+                    <a class="a-sidebar" asp-area="" asp-controller="Appointments" asp-action="Index"> Appointment</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled components">
+                <li class="nav-item">
+                    <a class="a-sidebar" asp-area="" asp-controller="Hospitals" asp-action="Index"> Hospitals</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled components">
+                <li class="nav-item">
+                    <a class="a-sidebar" asp-area="" asp-controller="Doctors" asp-action="Index"> Doctors</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled components">
+                <li class="nav-item">
+                    <a class="a-sidebar" asp-area="" asp-controller="Patients" asp-action="Index"> Patients</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled components">
+                <li class="nav-item">
+                    <a class="a-sidebar" asp-area="" asp-controller="Clinics" asp-action="Index"> Clinics</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled components">
+                <li class="nav-item">
+                    <a class="a-sidebar" asp-area="" asp-controller="Cities" asp-action="Index"> Cities</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled components">
+                <li class="nav-item">
+                    <a class="a-sidebar" asp-area="" asp-controller="Districts" asp-action="Index"> Districts</a>
+                </li>
+            </ul>
+            @if (User.IsInRole("Admin"))
+            {
+                <ul class="list-unstyled components">
+                    <li class="nav-item">
+                        <a class="a-sidebar" asp-area="" asp-controller="Roles" asp-action="Index"> Roles</a>
+                    </li>
+                </ul>
+                <ul class="list-unstyled components">
+                    <li class="nav-item">
+                        <a class="a-sidebar" asp-area="" asp-controller="Users" asp-action="Index"> Users</a>
+                    </li>
+                </ul>
+            }
+        </nav>
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" id="sidebarCollapse" class="a-navbar" title="Soldaki Menüyü Kapat">
+                            <i class="fa fa-list-alt"></i> Menu
+                        </a>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon navbar-span"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="a-navbar" asp-area="" asp-controller="Home" asp-action="Index"> Home</a>
+                        </li>
+                    </ul>
+                    <div class="navbar-text">
+                        <ul class="navbar-nav me-auto">
+
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <a asp-action="Login" asp-controller="Users" asp-area="Account" class="navbar-brand">Login</a>
+                                <a asp-action="Register" asp-controller="Users" asp-area="Account" class="navbar-brand">Register</a>
+                            }
+                            else
+                            {
+                                <a asp-action="Logout" asp-controller="Users" asp-area="Account" class="navbar-brand">Logout</a>
+                                <span class="navbar-brand" style="color:yellow"><h4>@User.Identity.Name</h4></span>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/layouts/blue/blue.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

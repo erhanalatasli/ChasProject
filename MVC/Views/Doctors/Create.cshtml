@@ -1,0 +1,93 @@
+﻿@using MVC.Settings;
+@model DoctorModel
+@*Generated from Custom Template.*@
+@*Model namespace using directive should be added to _ViewImports.cshtml.*@
+
+@* @{
+	ViewData["Title"] = "Create Doctor";
+}
+
+<h1>@ViewData["Title"]</h1> *@
+
+<a class="btn btn-info">Create New District</a>
+<hr />
+
+<div class="row">
+	<div class="col-12">
+		<form asp-action="Create" enctype="multipart/form-data">
+			@Html.AntiForgeryToken()
+			<div asp-validation-summary="All" class="text-danger"></div>
+			<div class="row mb-3">
+				<label asp-for="Name" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="Name" class="form-control" />
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="Surname" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="Surname" class="form-control" />
+					<span asp-validation-for="Surname" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="DateOfBirth" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="DateOfBirth" class="form-control" />
+					<span asp-validation-for="DateOfBirth" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="GenderId" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="GenderId" class="form-select" asp-items="ViewBag.GenderId">
+						<option value="">-- Select --</option>
+					</select>
+					<span asp-validation-for="GenderId" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="HospitalId" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="HospitalId" class="form-select" asp-items="ViewBag.HospitalId">
+						<option value="">-- Select --</option>
+					</select>
+					<span asp-validation-for="HospitalId" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="ClinicId" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="ClinicId" class="form-select" asp-items="ViewBag.ClinicId">
+						<option value="">-- Select --</option>
+					</select>
+					<span asp-validation-for="ClinicId" class="text-danger"></span>
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<label asp-for="Image" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input type="file" name="image" class="form-control" accept="@AppSettings.AcceptedImageExtensions" />
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<div class="offset-2 col-5">
+					<input type="submit" value="Save" class="btn btn-primary" />
+					&nbsp;&nbsp;
+					<button type="reset" class="btn btn-outline-primary">Reset</button>
+					&nbsp;&nbsp;
+					<a asp-action="Index" class="btn btn-outline-primary">Back to Doctor List</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}
+
+

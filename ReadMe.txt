@@ -1,0 +1,1 @@
+This project is a hospital management system where hospitals, doctors and patients can be viewed and appointments made.

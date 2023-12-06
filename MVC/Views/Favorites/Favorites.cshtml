@@ -1,0 +1,51 @@
+﻿@model IEnumerable<FavoritesModel>
+@*Generated from Custom Template.*@
+@*Model namespace using directive should be added to _ViewImports.cshtml.*@
+
+@{
+    ViewData["Title"] = "Recorded List";
+}
+
+@if (Model is not null && Model.Count() > 0)
+{
+    <p>
+        <a class="btn btn-danger" asp-action="ClearFavorites">Clear</a>
+    </p>
+    string favoritesCount = Model.Count() == 1 ? "1 record found." : Model.Count() + " records found.";
+    <p class="bg-secondary text-light">
+        @favoritesCount
+    </p>
+
+    <table class="table table-primary">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.HospitalName)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HospitalName)
+                    </td>
+                    <td>
+                    <td>
+                        <a class="btn btn-danger" asp-action="RemoveFromFavorites" asp-route-hospitalId="@item.HospitalId" asp-route-userId="@item.UserId" class="text-dark">Remove</a>
+                    </td>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="bg-secondary text-light">
+        No recorded found.
+    </p>
+}

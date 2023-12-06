@@ -1,0 +1,99 @@
+﻿@model HospitalModel
+@*Generated from Custom Template.*@
+@*Model namespace using directive should be added to _ViewImports.cshtml.*@
+
+@* @{
+	ViewData["Title"] = "Edit Hospital";
+}
+
+<h1>@ViewData["Title"]</h1> *@
+
+<a class="btn btn-info">Edit Hospital</a>
+<hr />
+
+<div class="row">
+	<div class="col-12">
+		<form asp-action="Edit">
+			@Html.AntiForgeryToken()
+			<div asp-validation-summary="All" class="text-danger"></div>
+			<div class="row mb-3">
+				<label asp-for="Name" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="Name" class="form-control" />
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="CityId" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="CityId" class="form-select" asp-items="ViewBag.CityId" id="cities">
+						<option value="">-- Select --</option>
+					</select>
+					<span asp-validation-for="CityId" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="DistrictId" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="DistrictId" class="form-select" asp-items="ViewBag.DistrictId" id="districts">
+						<option value="">-- Select --</option>
+					</select>
+					<span asp-validation-for="DistrictId" class="text-danger"></span>
+				</div>
+			</div>
+			<input type="hidden" asp-for="Id" />
+			<div class="row mb-3">
+				<div class="offset-2 col-5">
+					<input type="submit" value="Save" class="btn btn-primary" />
+					&nbsp;&nbsp;
+					<button type="reset" class="btn btn-outline-primary">Reset</button>
+					&nbsp;&nbsp;
+					<a class="btn btn-outline-primary" asp-action="Index">Back to Hospital List</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+@section Scripts {
+	<script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			var selectedCityId = @Model.CityId;
+			$("#cities").val(selectedCityId);
+
+			updateDistrictDropdown(selectedCityId);
+
+			$("#cities").change(function () {
+				selectedCityId = $(this).val();
+				updateDistrictDropdown(selectedCityId);
+			});
+
+			function updateDistrictDropdown(selectedCityId) {
+				if (selectedCityId) {
+					$.getJSON(
+						"/Hospitals/GetDistrictsByCity", // url
+						{ cityId: selectedCityId }, // data
+						function (districts) { // success
+							$("#districts").empty();
+							for (const district of districts) {
+								$("#districts").append('<option value="' + district.id + '">' + district.name + '</option>');
+							}
+						}
+					);
+				} else {
+					$("#districts").empty();
+					$("#districts").append('<option value="">-- Select District --</option>');
+				}
+			}
+
+		});
+	</script>
+
+	<partial name="_ValidationScriptsPartial" />
+}
+
+
+

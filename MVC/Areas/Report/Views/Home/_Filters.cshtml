@@ -1,0 +1,49 @@
+﻿@using MVC.Areas.Report.Models;
+@model HomeIndexViewModel
+
+<form asp-action="Index" data-ajax="true" data-ajax-update="#report" data-ajax-mode="replace" id="form">
+    <div class="row mb-3">
+        <div class="col-1">
+            @Html.DisplayNameFor(model => model.Filter.Patient)
+        </div>
+        <div class="col-3">
+            @Html.TextBoxFor(model => model.Filter.Patient, new { @class = "form-control textbox" })
+        </div>
+        <div class="col-1">
+            @Html.DisplayNameFor(model => model.Filter.Hospital)
+        </div>
+        <div class="col-3">
+            @Html.TextBoxFor(model => model.Filter.Hospital, new { @class = "form-control textbox" })
+        </div>
+        <div class="row mb-3"></div>
+        <div class="col-1">
+            @Html.DisplayNameFor(model => model.Filter.Clinic)
+        </div>
+        <div class="col-3">
+            @Html.TextBoxFor(model => model.Filter.Clinic, new { @class = "form-control textbox" })
+        </div>
+        <div class="col-1">
+            @Html.DisplayNameFor(model => model.Filter.Doctor)
+        </div>
+        <div class="col-3">
+            @Html.TextBoxFor(model => model.Filter.Doctor, new { @class = "form-control textbox" })
+        </div>
+        <div class="col-1">
+            @Html.DisplayNameFor(model => model.Filter.DateBegin)
+        </div>
+        <div class="col-3">
+            <div class="input-group">
+                @Html.TextBoxFor(model => model.Filter.DateBegin, new { @class = "form-control textbox datetimepicker", placeholder="Create Date Begin" })
+                <span class="input-group-text"></span>
+                @Html.TextBoxFor(model => model.Filter.DateEnd, new { @class = "form-control textbox datetimepicker", placeholder="Create Date End" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-1 col-11">
+            <button type="submit" class="btn btn-success">Search</button>
+            &nbsp;&nbsp;
+            <a href="" class="btn btn-warning" id="clear">Clear</a>
+        </div>
+    </div>
+</form>

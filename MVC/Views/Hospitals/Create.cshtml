@@ -1,0 +1,89 @@
+﻿@model HospitalModel
+@*Generated from Custom Template.*@
+@*Model namespace using directive should be added to _ViewImports.cshtml.*@
+
+@* @{
+	ViewData["Title"] = "Create New Hospital";
+}
+
+<h1>@ViewData["Title"]</h1> *@
+
+<a class="btn btn-info">Create New Hospital</a>
+<hr />
+
+<div class="row">
+	<div class="col-12">
+		<form asp-action="Create">
+			@Html.AntiForgeryToken()
+			<div asp-validation-summary="All" class="text-danger"></div>
+			<div class="row mb-3">
+				<label asp-for="Name" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="Name" class="form-control" />
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="CityId" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="CityId" class="form-select" asp-items="ViewBag.CityId" id="cities">
+						<option value="">-- Select City --</option>
+					</select>
+					<span asp-validation-for="CityId" class="text-danger"></span>
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<label asp-for="DistrictId" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="DistrictId" class="form-select" asp-items="ViewBag.DistrictId" id="districts">
+						<option value="">-- Select District --</option>
+					</select>
+					<span asp-validation-for="DistrictId" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<div class="offset-2 col-5">
+					<input type="submit" value="Save" class="btn btn-primary" />
+					&nbsp;&nbsp;
+					<button type="reset" class="btn btn-outline-primary">Reset</button>
+					&nbsp;&nbsp;
+					<a asp-action="Index" class="btn btn-outline-primary">Back to Hospital List</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+@section Scripts {
+	<script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$("#districts").empty();
+			$("#districts").append('<option value="">-- Select District -- </option>');
+
+			$("#cities").change(function () {
+				$("#districts").empty();
+				$("#districts").append('<option value="">-- All Districts -- </option>');
+				var selectedCityId = $("#cities").val();
+				if (selectedCityId != "") {
+					$.getJSON(
+						"/Hospitals/GetDistrictsByCity", // url
+						{ cityId: selectedCityId }, // data
+						function (districts) { // success
+							for (const district of districts) {
+								$("#districts").append('<option value="' + district.id + '">' + district.name + '</option>');
+							}
+						}
+					);
+				}
+			});
+		});
+	</script>
+
+	<partial name="_ValidationScriptsPartial" />
+}
+
+

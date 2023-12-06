@@ -1,0 +1,130 @@
+﻿@using MVC.Settings;
+@model DoctorModel
+@*Generated from Custom Template.*@
+@*Model namespace using directive should be added to _ViewImports.cshtml.*@
+
+@* @{
+	ViewData["Title"] = "Edit Doctor";
+}
+
+<h1>@ViewData["Title"]</h1>
+ *@
+<a class="btn btn-info">Edit Doctor</a>
+<hr />
+
+<div class="row">
+	<div class="col-12">
+		<form asp-action="Edit" enctype="multipart/form-data">
+			@Html.AntiForgeryToken()
+			<div asp-validation-summary="All" class="text-danger"></div>
+			<div class="row mb-3">
+				<label asp-for="Name" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="Name" class="form-control" />
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="Surname" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="Surname" class="form-control" />
+					<span asp-validation-for="Surname" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="DateOfBirth" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<input asp-for="DateOfBirth" class="form-control" />
+					<span asp-validation-for="DateOfBirth" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="GenderId" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="GenderId" class="form-select" asp-items="ViewBag.GenderId">
+						<option value="">-- Select --</option>
+					</select>
+					<span asp-validation-for="GenderId" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="HospitalId" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="HospitalId" class="form-select" asp-items="ViewBag.HospitalId">
+						<option value="">-- Select --</option>
+					</select>
+					<span asp-validation-for="HospitalId" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="ClinicId" class="col-2 col-form-label"></label>
+				<div class="col-5">
+					<select asp-for="ClinicId" class="form-select" asp-items="ViewBag.ClinicId">
+						<option value="">-- Select --</option>
+					</select>
+					<span asp-validation-for="ClinicId" class="text-danger"></span>
+				</div>
+			</div>
+
+			<div class="row mb-3">
+				<label asp-for="Image" class="col-2 col-form-label"></label>
+				<div class="col-2">
+					@if (Model.ImgSrcDisplay is not null)
+					{
+						<img src="@Model.ImgSrcDisplay" class="img-fluid" onclick="showImage('@Model.ImgSrcDisplay')" />
+					}
+					else
+					{
+						<i class="far fa-image" title="No Certificate"></i>
+					}
+				</div>
+				<div class="col-4">
+					<input type="file" name="image" class="form-control" accept="@AppSettings.AcceptedImageExtensions" />
+				</div>
+			</div>
+
+			<div id="imageModal" class="modal">
+				<span style="float:left; left:500px; top:20px;position:relative;" class="close" onclick="closeModal()"><h4>&#10006;</h4></span>
+				<img class="modal-content" id="modalImage">
+			</div>
+
+			<input type="hidden" asp-for="Id" />
+			<div class="row mb-3">
+				<div class="offset-2 col-5">
+					<input type="submit" value="Save" class="btn btn-primary" />
+					&nbsp;&nbsp;
+					<button type="reset" class="btn btn-outline-primary">Reset</button>
+					&nbsp;&nbsp;
+					<a class="btn btn-outline-primary" asp-action="Index">Back to Doctor List</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+@section Scripts {
+
+	<script>
+		function showImage(src) {
+			var modal = document.getElementById("imageModal");
+			var modalImg = document.getElementById("modalImage");
+
+			modal.style.display = "block";
+			modalImg.src = src;
+
+			modalImg.style.width = (modalImg.width - 900) + "px";
+			modalImg.style.height = (modalImg.height - 900) + "px";
+			modalImg.style.left = "500px";
+			modalImg.style.top = "50px";
+		}
+
+		function closeModal() {
+			var modal = document.getElementById("imageModal");
+			modal.style.display = "none";
+		}
+	</script>
+
+	<partial name="_ValidationScriptsPartial" />
+}
+

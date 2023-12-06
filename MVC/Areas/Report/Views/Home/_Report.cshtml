@@ -1,0 +1,71 @@
+﻿@using Business.Models.Report;
+@model IEnumerable<ReportItemModel>
+
+<div id="report">
+    @if (Model != null && Model.Count() > 0)
+    {
+        <p class="text-primary">@Model.Count() record(s) found.</p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserDisplay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HospitalDisplay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClinicDisplay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DoctorDisplay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    @* <th>
+                @Html.DisplayNameFor(model => model.Explanation)
+                </th> *@
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <span title="@item.Explanation"><i class="fa-solid fa-circle-info" style="cursor: help;"></i></span>
+                            &nbsp;@Html.DisplayFor(modelItem => item.UserDisplay)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HospitalDisplay)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClinicDisplay)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DoctorDisplay)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                        @* <td>
+                @Html.DisplayFor(modelItem => item.Explanation)
+                </td> *@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-danger">No records found.</p>
+    }
+</div>

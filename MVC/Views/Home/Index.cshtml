@@ -1,0 +1,52 @@
+﻿@* @{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+ *@
+
+
+<div class="container-fluid header bg-primary p-0 mb-5">
+    <div class="row g-0 align-items-center flex-column-reverse flex-lg-row">
+        <div class="col-lg-6 p-5 wow fadeIn" data-wow-delay="0.1s">
+            <h6 class="display-6 text-white mb-5">Welcome to the Central Hospital Appointment System!</h6>
+            <p class="display-7 text-white mb-4" style="font-size:160%;">You've taken a step to prioritize your health. We are here to provide you with the best service. Wishing you healthy days!</p>
+            <div></div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <video width="250" height="320" autoplay muted loop onclick="this.paused ? this.play() : this.pause();">
+                        <source src="~/img/food-smile.mp4" type="video/mp4" />
+                    </video>
+                </div>
+                <div class="col-md-6 mb-4" style="transform: rotate(-15deg); position: relative; top: 60px;">
+                    <img width="300" height="150" src="~/img/healthy_days.png">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+            <div class="owl-carousel header-carousel">
+                <div class="owl-carousel-item position-relative">
+                    <img class="img-fluid" src="~/img/cardiology.jpg" alt="">
+                    <div class="owl-carousel-text">
+                        <h1 class="display-1 text-white mb-0">Cardiology</h1>
+                    </div>
+                </div>
+                <div class="owl-carousel-item position-relative">
+                    <img class="img-fluid" src="~/img/neurology.png" alt="">
+                    <div class="owl-carousel-text">
+                        <h1 class="display-1 text-white mb-0">Neurology</h1>
+                    </div>
+                </div>
+                <div class="owl-carousel-item position-relative">
+                    <img class="img-fluid" src="~/img/infectious.png" alt="">
+                    <div class="owl-carousel-text">
+                        <h1 class="display-1 text-white mb-0">Infectious Diseases</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

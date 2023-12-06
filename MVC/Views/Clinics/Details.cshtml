@@ -1,0 +1,36 @@
+﻿@model ClinicModel
+@*Generated from Custom Template.*@
+@*Model namespace using directive should be added to _ViewImports.cshtml.*@
+
+@* @{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@ViewData["Title"]</h1> *@
+
+<div>
+    <a class="btn btn-info">Clinic Details</a>
+    <hr />
+    <dl class="row">
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-2">
+            @Html.DisplayNameFor(model => model.Doctors)
+        </dt>
+        <dd class="col-10">
+            @for (var i = 0; i < Model.Doctors.Count; i++)
+            {
+                <text>@(i + 1)- @Model.Doctors[i].NameSurname</text>
+                <br />
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>&nbsp;|&nbsp;
+    <a class="btn btn-outline-primary" asp-action="Index">Back to Clinic List</a>
+</div>
